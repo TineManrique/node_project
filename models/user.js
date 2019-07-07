@@ -10,13 +10,18 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
   password: {
-    type: String,
-    required: true
+    type: String
   },
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  facebookId: {
+    type: String,
+  },
+  googleId: {
+    type: String,
+  },
 });
 
 const User = mongoose.model('User', UserSchema);

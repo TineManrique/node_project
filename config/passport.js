@@ -1,6 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
-const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 // Load User model
 const User = require('../models/User');
@@ -38,4 +39,32 @@ module.exports = function(passport) {
       done(err, user);
     });
   });
+
+  passport.use(new GoogleStrategy({
+    clientID: '474776526269-ik1ci3l9r6iso0ngqtf33q24gk5hsll4.apps.googleusercontent.com',
+    clientSecret: 'IfNqsM2oTGogyK-yn0AhXsKG',
+    callbackURL: "http://localhost:5000/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOne({googleId: profile.id}, (err, user) => {
+      if (!user) {
+        const newUser = new User({
+          name: profile.displayName,
+          email: profile.emails[0].value,
+          googleId: profile.id,
+        });
+
+        newUser.save()
+              .then(user => {
+                done(null, newUser);
+                console.log('Successful create');
+                // res.redirect('/users/login');
+              })
+              .catch(err => console.log(err));
+      } else {
+        console.log('Existing');
+      }
+    })
+  }
+));
 };

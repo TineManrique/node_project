@@ -76,6 +76,10 @@ router.post('/register', (req, res) => {
   }
 });
 
+router.post('/register/google', (req, res) => {
+  debugger;
+});
+
 // Login
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
