@@ -1,7 +1,8 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 
 // Load User model
 const User = require('../models/User');
@@ -56,15 +57,41 @@ module.exports = function(passport) {
 
         newUser.save()
               .then(user => {
-                done(null, newUser);
+                done(null, user.id)
                 console.log('Successful create');
-                // res.redirect('/users/login');
               })
               .catch(err => console.log(err));
       } else {
         console.log('Existing');
       }
     })
-  }
-));
+    }
+  ));
+
+  passport.use(new FacebookStrategy({
+    clientID: "355212605169825",
+    clientSecret: "0bcc50cbcb6fc380050681bf1f49a93a",
+    callbackURL: "http://localhost:5000/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+      User.findOne({facebookId: profile.id}, (err, user) => {
+        if (!user) {
+          const newUser = new User({
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            facebookId: profile.id,
+          });
+  
+          newUser.save()
+                .then(user => {
+                  done(null, user.id)
+                  console.log('Successful create');
+                })
+                .catch(err => console.log(err));
+        } else {
+          console.log('Existing');
+        }
+      })
+      }
+  ));
 };
