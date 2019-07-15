@@ -45,7 +45,7 @@ module.exports = function(passport) {
     clientSecret: 'IfNqsM2oTGogyK-yn0AhXsKG',
     callbackURL: "http://localhost:5000/auth/google/callback"
   },
-  function(accessToken, refreshToken, profile, cb) {
+  function(request, accessToken, refreshToken, profile, done) {
     User.findOne({googleId: profile.id}, (err, user) => {
       if (!user) {
         const newUser = new User({
@@ -56,12 +56,13 @@ module.exports = function(passport) {
 
         newUser.save()
               .then(user => {
-                done(null, user.id)
                 console.log('Successful create');
+                return done(err, user);
               })
               .catch(err => console.log(err));
       } else {
         console.log('Existing');
+        return done(err, user);
       }
     })
     }
