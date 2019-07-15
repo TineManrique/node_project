@@ -93,41 +93,4 @@ router.get('/logout', (req, res) => {
   res.redirect('/users/login');
 });
 
-// via Google
-// router.get('/auth/google', (req, res, next) => {
-//   passport.authenticate('google', {
-//     successRedirect: '/dashboard',
-//     failureRedirect: '/users/login',
-//     failureFlash: true
-//   })(req, res, next);
-// });
-
-router.get('/auth/google',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
-
-router.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/users/login' }),
-  function(req, res) {
-    res.redirect('/dashboard');
-  }
-);
-
-// via Facebook
-router.get('/auth/facebook',
-  passport.authenticate('facebook')
-);
-
-router.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { 
-    // successRedirect: '/dashboard',
-    failureRedirect: '/users/login',
-    // failureFlash: true
-  }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    console.log(req.user)
-    res.redirect('/dashboard');
-  }
-);
-
 module.exports = router;

@@ -60,8 +60,23 @@ app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/dashboard');
   });
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook')
+);
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { 
+    failureRedirect: '/users/login',
+  }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    console.log(req.user)
+    res.redirect('/dashboard');
+  }
+);
 
 // Routes
 app.use('/', require('./routes/index.js'));
