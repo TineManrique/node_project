@@ -1,58 +1,74 @@
-<div class="row mt-5">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <img src="logo.PNG"/>      
-      <% include ./partials/messages %>
-      <form action="/users/register" method="POST">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input
-            type="name"
-            id="name"
-            name="name"
-            class="form-control"
-            placeholder="Enter Name"
-            value="<%= typeof name != 'undefined' ? name : '' %>"
-          />
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="card card-signin">
+          <div class="card-body">
+            <h5 class="card-title text-center">Register</h5>
+            <% include ./partials/messages %>
+            <form class="form-signin" action="/users/register" method="POST">
+              <div class="form-label-group">
+                  <input
+                  type="name"
+                  id="name"
+                  name="name"
+                  class="form-control"
+                  placeholder="Enter Name"
+                  value="<%= typeof name != 'undefined' ? name : '' %>"
+                  />
+                <label for="name">Name</label>
+              </div>
+              <div class="form-label-group">
+                  <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Enter Email"
+                  value="<%= typeof email != 'undefined' ? email : '' %>"
+                  required
+                  autofocus
+                />
+                <label for="email">Email address</label>
+              </div>
+  
+              <div class="form-label-group">
+                  <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Create Password"
+                  value="<%= typeof password != 'undefined' ? password : '' %>"
+                  required
+                />
+                <label for="password">Password</label>
+              </div>
+
+              <div class="form-label-group">
+                  <input
+                  type="password"
+                  id="password2"
+                  name="password2"
+                  class="form-control"
+                  placeholder="Create Password"
+                  value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+                  required
+                />
+                <label for="password2">Confirm Password</label>
+              </div>
+  
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Remember password</label>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+              <hr class="my-4">
+              <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i href="/auth/google" class="fab fa-google mr-2"></i> Sign in with Google</button>
+              <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i href="/auth/facebook" class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+              <label class="custom-control-label">Already Have An Account? <a href="/">Login</a></label>
+            </form>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="form-control"
-            placeholder="Enter Email"
-            value="<%= typeof email != 'undefined' ? email : '' %>"
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            placeholder="Create Password"
-            value="<%= typeof password != 'undefined' ? password : '' %>"
-          />
-        </div>
-        <div class="form-group">
-          <label for="password2">Confirm Password</label>
-          <input
-            type="password"
-            id="password2"
-            name="password2"
-            class="form-control"
-            placeholder="Confirm Password"
-            value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Register</button>
-      </form>
-      <a href="/auth/google" class="btn btn-secondary btn-block">via Google</a>
-      <a href="/auth/facebook" class="btn btn-info btn-block">via Facebook</a>
-      <p class="lead mt-4">Already Have An Account? <a href="/users/login">Login</a></p>
+      </div>
     </div>
   </div>
-</div>

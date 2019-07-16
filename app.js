@@ -25,6 +25,8 @@ mongoose
 // EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
+app.use( express.static( "public" ) );
+
 
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
@@ -70,7 +72,7 @@ app.get('/auth/facebook',
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { 
-    failureRedirect: '/users/login',
+    failureRedirect: '/',
   }),
   function(req, res) {
     // Successful authentication, redirect home.
@@ -78,11 +80,9 @@ app.get('/auth/facebook/callback',
     res.redirect('/dashboard');
   }
 );
-
 // Routes
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users.js'));
-app.use( express.static( "public" ) );
 
 const PORT = process.env.PORT || 5000;
 
