@@ -25,7 +25,9 @@ mongoose
 // EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
-app.use( express.static( "public" ) );
+// app.use( express.static( "public" ) );
+// app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 
 // Express body parser
@@ -58,7 +60,7 @@ app.use(function(req, res, next) {
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-app.get('/auth/google/callback', 
+app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     debugger;
@@ -82,7 +84,7 @@ app.get('/auth/facebook/callback',
 );
 // Routes
 app.use('/', require('./routes/index.js'));
-app.use('/users', require('./routes/users.js'));
+// app.use('/users', require('./routes/users.js'));
 
 const PORT = process.env.PORT || 5000;
 

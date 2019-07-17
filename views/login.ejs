@@ -3,9 +3,9 @@
     <div class="col-md-6 col-md-offset-3">
       <div class="card card-signin">
         <div class="card-body">
-          <h5 class="card-title text-center">Login</h5>
+          <img src="./img/logo1.png" alt="logo" class="img-logo">
           <% include ./partials/messages %>
-          <form class="form-signin" action="/users/login" method="POST">
+          <form class="form-signin" action="/login" method="POST">
             <div class="form-label-group">
                 <input
                 type="email"
@@ -35,11 +35,11 @@
               <input type="checkbox" class="custom-control-input" id="customCheck1">
               <label class="custom-control-label" for="customCheck1">Remember password</label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Log in</button>
             <hr class="my-4">
-            <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i href="/auth/google" class="fab fa-google mr-2"></i> Sign in with Google</button>
-            <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i href="/auth/facebook" class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
-            <label class="custom-control-label" for="customCheck1">No Account? <a href="/users/register">Register</a></label>
+            <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i href="/auth/google" class="fab fa-google mr-2"></i> Log in with Google</button>
+            <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i href="/auth/facebook" class="fab fa-facebook-f mr-2"></i> Login in with Facebook</button>
+            <label class="custom-control-label" for="customCheck1">No Account? <a href="/register">Register</a></label>
           </form>
         </div>
       </div>
